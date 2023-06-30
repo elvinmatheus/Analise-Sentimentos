@@ -83,12 +83,12 @@ with fs.open('s3://analise-dados-sentimentos/feedbacks.csv', 'rb') as s3_file:
     dados = pd.read_csv(s3_file, delimiter=';')
 
 # Lista de objetos Feedback
-feedbacks = [Feedback(linha['nota'], linha['comentario']) for i, linha in dados.iterrows()]
+feedbacks = [Feedback(linha['nota'], linha['comentario']) for i, linha in dados.iterrows() ]
 
 analisador = AnalisadorFeedback(feedbacks)
 nps = analisador.calcular_nps()
 
-# analisador.criar_grafico_nps(nps)
+analisador.criar_grafico_nps(nps)
 
 insights = analisador.analisar_sentimentos(feedbacks)
 print(insights)
